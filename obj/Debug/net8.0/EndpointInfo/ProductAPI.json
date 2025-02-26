@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ProductAPI",
+    "description": "PRUEBA TÉCNICA: DESARROLLO DE UNA WEB API EN C#/.NET ",
+    "contact": {
+      "name": "Juan Fernando Dorado Prado",
+      "email": "juanfdp@gmail.com"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Obtiene una lista de todos los productos.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Crea un nuevo producto.",
+        "requestBody": {
+          "description": "Los datos del producto a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Devuelve el producto creado."
+          },
+          "400": {
+            "description": "Si los datos del producto son inválidos."
+          }
+        }
+      }
+    },
+    "/api/products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Obtiene un producto por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del producto.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve el producto solicitado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Si el producto no existe."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Actualiza un producto existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del producto a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Los nuevos datos del producto.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Si el producto se actualizó correctamente."
+          },
+          "400": {
+            "description": "Si los datos del producto son inválidos."
+          },
+          "404": {
+            "description": "Si el producto no existe."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Elimina un producto por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del producto a eliminar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Si el producto se eliminó correctamente."
+          },
+          "404": {
+            "description": "Si el producto no existe."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "required": [
+          "Name"
+        ],
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Identificador único del producto.",
+            "format": "int32"
+          },
+          "Name": {
+            "maxLength": 100,
+            "minLength": 3,
+            "type": "string",
+            "description": "Nombre del producto. Este campo es obligatorio."
+          },
+          "Price": {
+            "minimum": 0,01,
+            "type": "number",
+            "description": "Precio del producto. Debe ser mayor que 0.",
+            "format": "double"
+          },
+          "Quantity": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Cantidad disponible del producto. Debe ser mayor que 0.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representa un producto en el sistema."
+      }
+    }
+  }
+}

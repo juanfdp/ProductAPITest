@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductAPI</name>
+    </assembly>
+    <members>
+        <member name="T:ProductAPI.Controllers.ProductsController">
+            <summary>
+            Controlador para gestionar productos.
+            </summary>
+        </member>
+        <member name="M:ProductAPI.Controllers.ProductsController.Get">
+            <summary>
+            Obtiene una lista de todos los productos.
+            </summary>
+            <returns>Una lista de productos.</returns>
+        </member>
+        <member name="M:ProductAPI.Controllers.ProductsController.Get(System.Int32)">
+            <summary>
+            Obtiene un producto por su ID.
+            </summary>
+            <param name="id">El ID del producto.</param>
+            <returns>El producto correspondiente al ID especificado.</returns>
+            <response code="200">Devuelve el producto solicitado.</response>
+            <response code="404">Si el producto no existe.</response>
+        </member>
+        <member name="M:ProductAPI.Controllers.ProductsController.Post(ProductAPI.Models.Product)">
+            <summary>
+            Crea un nuevo producto.
+            </summary>
+            <param name="product">Los datos del producto a crear.</param>
+            <returns>El producto recién creado.</returns>
+            <response code="201">Devuelve el producto creado.</response>
+            <response code="400">Si los datos del producto son inválidos.</response>
+        </member>
+        <member name="M:ProductAPI.Controllers.ProductsController.Put(System.Int32,ProductAPI.Models.Product)">
+            <summary>
+            Actualiza un producto existente.
+            </summary>
+            <param name="id">El ID del producto a actualizar.</param>
+            <param name="product">Los nuevos datos del producto.</param>
+            <returns>Una respuesta sin contenido.</returns>
+            <response code="204">Si el producto se actualizó correctamente.</response>
+            <response code="400">Si los datos del producto son inválidos.</response>
+            <response code="404">Si el producto no existe.</response>
+        </member>
+        <member name="M:ProductAPI.Controllers.ProductsController.Delete(System.Int32)">
+            <summary>
+            Elimina un producto por su ID.
+            </summary>
+            <param name="id">El ID del producto a eliminar.</param>
+            <returns>Una respuesta sin contenido.</returns>
+            <response code="204">Si el producto se eliminó correctamente.</response>
+            <response code="404">Si el producto no existe.</response>
+        </member>
+        <member name="T:ProductAPI.Models.Product">
+            <summary>
+            Representa un producto en el sistema.
+            </summary>
+        </member>
+        <member name="P:ProductAPI.Models.Product.Id">
+            <summary>
+            Identificador único del producto.
+            </summary>
+        </member>
+        <member name="P:ProductAPI.Models.Product.Name">
+            <summary>
+            Nombre del producto. Este campo es obligatorio.
+            </summary>
+        </member>
+        <member name="P:ProductAPI.Models.Product.Price">
+            <summary>
+            Precio del producto. Debe ser mayor que 0.
+            </summary>
+        </member>
+        <member name="P:ProductAPI.Models.Product.Quantity">
+            <summary>
+            Cantidad disponible del producto. Debe ser mayor que 0.
+            </summary>
+        </member>
+    </members>
+</doc>
